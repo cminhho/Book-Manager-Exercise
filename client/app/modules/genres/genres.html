@@ -8,21 +8,21 @@
         </div>
     </div>
 
-    <div class="panel panel-default" ng-if="gneresVM.selectedBook">
+    <div class="panel panel-default" ng-if="selectedGenre">
       <div class="panel-heading">
         <div class="text-right">
-            <a href="" ng-click="gneresVM.closeDetails()">Close <span class="glyphicon glyphicon-remove"></span></a>
+            <a href="" ng-click="closeDetails()">Close <span class="glyphicon glyphicon-remove"></span></a>
         </div>
         <h3 class="panel-title">
-            {{gneresVM.selectedBook.title}}
+            {{selectedGenre.title}}
         </h3>
-        <i>By {{gneresVM.selectedBook.author | formatName}}</i>
+        <i>By {{selectedGenre.author | formatName}}</i>
       </div>
       <div class="panel-body">
-        <p>{{gneresVM.selectedBook.description}}</p>
+        <p>{{selectedGenre.description}}</p>
 
-        <strong>Length:</strong> {{gneresVM.selectedBook.pageLength}} pages<br />
-        <strong>Published Date:</strong> {{gneresVM.selectedBook.publicationDate | formatLongDate}}<br />
+        <strong>Length:</strong> {{selectedGenre.pageLength}} pages<br />
+        <strong>Published Date:</strong> {{selectedGenre.publicationDate | formatLongDate}}<br />
       </div>
     </div>
 
@@ -36,16 +36,17 @@
         </tr>
       </thead>
       <tbody>
-          <tr ng-repeat="book in gneresVM.booksList">
-            <td>{{book.title}}</td>
-            <td>{{book.author | formatName}}</td>
-            <td>{{book.publicationDate | formatShortDate}}</td>
+          <tr ng-repeat="genre in genresList">
+            <td>{{genre.title}}</td>
+            <td>{{genre.author | formatName}}</td>
+            <td>{{genre.publicationDate | formatShortDate}}</td>
             <td class="text-right">
-                <a class="btn btn-xs btn-default" ui-sref="editGenre({ id: book.id })"><span class="glyphicon glyphicon-pencil"></span></a> 
-                <a class="btn btn-xs btn-danger" ng-click="editGenre({ id: book.id })"><span class="glyphicon glyphicon-remove"></span></a>
+                <a href="" ng-click="selectGenre(genre)">Details</a>
+                <a class="btn btn-xs btn-default" ui-sref="editGenre({ id: genre.id })"><span class="glyphicon glyphicon-pencil"></span></a> 
+                <a class="btn btn-xs btn-danger" ng-click="editGenre({ id: genre.id })"><span class="glyphicon glyphicon-remove"></span></a>
             </td>
           </tr>
-          <tr ng-if="!gneresVM.booksList.length">
+          <tr ng-if="!genresList.length">
             <td colspan="4">
                 No Books in Inventory.  <a href="" ui-sref="addGenre">Add one now.</a>
             </td>

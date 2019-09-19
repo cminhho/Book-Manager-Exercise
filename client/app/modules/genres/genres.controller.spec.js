@@ -2,10 +2,10 @@
 
 describe('Controller - Genres Controller', function () {
 
-    var booksController;
-    var booksServiceMock;
+    var genresController;
+    var genresServiceMock;
     var $rootScope;
-    var $state;
+    var $scope;
     var $q;
     var $timeout;
     var deferredListResponse;
@@ -13,76 +13,69 @@ describe('Controller - Genres Controller', function () {
 
     beforeEach(function () {
 
-        module('ui.router.state');
         module('book-inventory-app.genres');
 
-        booksServiceMock = jasmine.createSpyObj('GenresService', ['getGenres', 'deleteGenre']);
+        genresServiceMock = jasmine.createSpyObj('GenresService', ['getGenres', 'deleteGenre']);
         mockGenreList = [{ id: '1' }, { id: '2' }, { id: '3' }];
 
-        inject(function ($controller, _$rootScope_, _$state_, _$q_, _$timeout_) {
+        inject(function ($controller, _$rootScope_, _$q_, _$timeout_) {
             $rootScope = _$rootScope_;
-            $state = _$state_;
             $q = _$q_;
             $timeout = _$timeout_;
+            $scope = {};
 
             deferredListResponse = $q.defer();
-            booksServiceMock.getGenres.and.returnValue(deferredListResponse.promise);
+            genresServiceMock.getGenres.and.returnValue(deferredListResponse.promise);
             deferredListResponse.resolve(mockGenreList);
 
-            booksController = $controller('GenresController', {
-                $state: $state,
-                GenresService: booksServiceMock
+            genresController = $controller('GenresController', {
+                $scope: $scope,
+                GenresService: genresServiceMock
             });
-
-            spyOn($state, 'go');
 
             $rootScope.$apply();
         });
     });
 
-    it('should load a list of books on init', function () {
-        debugger
-        var $scope = $rootScope.$new();
-        $scope.hello();
-        debugger
-        expect($scope.selectedGenre).toBe('hello');
-    })
-
-    it('should load a list of books on init', function () {
-        expect(booksController.booksList).toBeDefined();
-        expect(booksController.booksList).toBe(mockGenreList);
-        expect(booksController.booksList.length).toBe(3);
+    it('should load a list of genres on init', function () {
+        expect($scope.genresList).toBeDefined();
+        expect($scope.genresList).toBe(mockGenreList);
+        expect($scope.genresList.length).toBe(3);
     })
 
     it('should select a book for the details view', function () {
-        expect(booksController.selectedGenre).toBeUndefined();
+        expect($scope.selectedGenre).toBeUndefined();
+        
+        $scope.selectGenre(mockGenreList[0]);
+        expect($scope.selectedGenre).toBe(mockGenreList[0]);
 
-        booksController.selectGenre(mockGenreList[0]);
-        expect(booksController.selectedGenre).toBe(mockGenreList[0]);
-
-        booksController.selectGenre(mockGenreList[2]);
-        expect(booksController.selectedGenre).toBe(mockGenreList[2]);
+        $scope.selectGenre(mockGenreList[2]);
+        expect($scope.selectedGenre).toBe(mockGenreList[2]);
     })
 
-    it('should call the service to delete a book', function () {
+    it('should call the service to delete a genre', function () {
+        // given
         var deferred = $q.defer();
-        booksServiceMock.deleteGenre.and.returnValue(deferred.promise);
+        genresServiceMock.deleteGenre.and.returnValue(deferred.promise);
 
-        booksController.deleteGenre('2');
-        expect(booksServiceMock.deleteGenre).toHaveBeenCalledWith('2');
+        // when
+        $scope.deleteGenre('2');
+
+        // then
+        expect(genresServiceMock.deleteGenre).toHaveBeenCalledWith('2');
     })
 
-    it('should reload the book list after successfully deleting a book', function () {
+    it('should reload the genre list after successfully deleting a genre', function () {
         var deferred = $q.defer();
-        booksServiceMock.deleteGenre.and.returnValue(deferred.promise);
+        genresServiceMock.deleteGenre.and.returnValue(deferred.promise);
 
-        booksServiceMock.getGenres.calls.reset();
-        expect(booksServiceMock.getGenres).not.toHaveBeenCalled();
+        genresServiceMock.getGenres.calls.reset();
+        expect(genresServiceMock.getGenres).not.toHaveBeenCalled();
 
-        booksController.deleteGenre('1');
+        $scope.deleteGenre('1');
         deferred.resolve(true);
         $rootScope.$apply();
-        expect(booksServiceMock.getGenres).toHaveBeenCalled();
+        expect(genresServiceMock.getGenres).toHaveBeenCalled();
     })
 
 });

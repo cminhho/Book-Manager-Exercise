@@ -15,7 +15,7 @@
                     views: {
                         'content@': {
                             templateUrl: 'app/modules/genres/genres.html',
-                            controller: 'GenresController as gneresVM'
+                            controller: 'GenresController'
                         }
                     }
                 })

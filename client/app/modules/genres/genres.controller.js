@@ -1,22 +1,21 @@
 (function (angular) {
-    GenresController.$inject = ['GenresService', '$state'];
+    GenresController.$inject = ['$scope', 'GenresService'];
 
-    function GenresController(GenresService, $state) {
-        var vm = this;
+    function GenresController($scope, GenresService) {
 
         function onListReturn(data) {
-            vm.booksList = data;
+            $scope.genresList = data;
         };
 
         function loadGenres() {
             GenresService.getGenres().then(onListReturn);
         };
-
-        vm.selectGenre = function (book) {
-            vm.selectedGenre = book;
+        
+        $scope.selectGenre = function (genre) {
+            $scope.selectedGenre = genre;
         };
 
-        vm.deleteGenre = function (id) {
+        $scope.deleteGenre = function (id) {
             GenresService.deleteGenre(id)
                 .then(function (success) {
                     if (success)
@@ -24,8 +23,8 @@
                 });
         };
 
-        vm.closeDetails = function () {
-            vm.selectedGenre = null;
+        $scope.closeDetails = function () {
+            $scope.selectedGenre = null;
         };
 
         // Init controller
