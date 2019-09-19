@@ -41,14 +41,6 @@ describe('Controller - Books Controller', function () {
     });
 
     it('should load a list of books on init', function () {
-        debugger
-        var $scope = $rootScope.$new();
-        $scope.hello();
-        debugger
-        expect($scope.selectedBook).toBe('hello');
-    })
-
-    it('should load a list of books on init', function () {
         expect(booksController.booksList).toBeDefined();
         expect(booksController.booksList).toBe(mockBookList);
         expect(booksController.booksList.length).toBe(3);
