@@ -1,0 +1,38 @@
+{
+  "name": "book-inventory-exercise",
+  "version": "1.0.0",
+  "description": "Prerequisites:",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "karma start",
+    "test-watch": "node node_modules/karma/bin/karma start --browsers=Chrome --single-run=false --auto-watch"
+  },
+  "author": "Ho Minh Chung <hmchung92@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "method-override": "^2.3.6",
+    "mongoose": "^4.4.20",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.4.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "1.7.1",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-jasmine": "1.1.0",
+    "karma-junit-reporter": "1.2.0",
+    "karma-phantomjs-launcher": "1.0.4",
+    "karma-script-launcher": "1.0.0",
+    "phantomjs-prebuilt": "^2.1.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cminhho/Book-Manager-Exercise.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cminhho/Book-Manager-Exercise/issues"
+  },
+  "homepage": "https://github.com/cminhho/Book-Manager-Exercise#readme"
+}

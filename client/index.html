@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Book Inventory App</title>
+
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+
+<body ng-app="book-inventory-app">
+	<div ui-view="navbar" ng-cloak></div>
+	<div class="container" ui-view="content"></div>
+
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="lib/lodash/lodash.js"></script>
+	<script src="lib/moment/moment.js"></script>
+
+	<script src="app/app.js"></script>
+	<script src="app/modules.js"></script>
+
+	<script src="app/app.state.js"></script>
+
+	<!-- Services -->
+	<script src="app/common/services/date-validator/validateDateService.js"></script>
+	<script src="app/common/services/books//books.service.js"></script>
+	<script src="app/common/services/genres/genres.service.js"></script>
+
+	<!-- Filters -->
+	<script src="app/common/filters/formatName.js"></script>
+	<script src="app/common/filters/formatShortDate.js"></script>
+	<script src="app/common/filters/formatLongDate.js"></script>
+
+	<!-- Layouts -->
+	<script src="app/layouts/navbar/navbar.controller.js"></script>
+
+	<!-- Books -->
+	<script src="app/modules/books/books.controller.js"></script>
+	<script src="app/modules/books/books.state.js"></script>
+	<script src="app/modules/books/editBook/editBook.controller.js"></script>
+	<script src="app/modules/books/addBook/addBook.controller.js"></script>
+
+	<!-- Genres -->
+	<script src="app/modules/genres/genres.controller.js"></script>
+	<script src="app/modules/genres/genres.state.js"></script>
+	<script src="app/modules/genres/add-genre/add-genre.controller.js"></script>
+	<script src="app/modules/genres/edit-genre/edit-genre.controller.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<div>
+    <div class="row">
+        <div class="col-xs-9">
+            <h1>Book Genres</h1><br />
+        </div>
+        <div class="col-xs-3 text-right" style="padding-top: 35px;">
+            <a href="" ui-sref="addGenre"><span class="glyphicon glyphicon-plus"></span> Add New Genre</a>
+        </div>
+    </div>
+
+    <div class="panel panel-default" ng-if="gneresVM.selectedBook">
+      <div class="panel-heading">
+        <div class="text-right">
+            <a href="" ng-click="gneresVM.closeDetails()">Close <span class="glyphicon glyphicon-remove"></span></a>
+        </div>
+        <h3 class="panel-title">
+            {{gneresVM.selectedBook.title}}
+        </h3>
+        <i>By {{gneresVM.selectedBook.author | formatName}}</i>
+      </div>
+      <div class="panel-body">
+        <p>{{gneresVM.selectedBook.description}}</p>
+
+        <strong>Length:</strong> {{gneresVM.selectedBook.pageLength}} pages<br />
+        <strong>Published Date:</strong> {{gneresVM.selectedBook.publicationDate | formatLongDate}}<br />
+      </div>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Title</td>
+          <td>Author</td>
+          <td>Publication Date</td>
+          <td class="text-right">Actions</td>
+        </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="book in gneresVM.booksList">
+            <td>{{book.title}}</td>
+            <td>{{book.author | formatName}}</td>
+            <td>{{book.publicationDate | formatShortDate}}</td>
+            <td class="text-right">
+                <a class="btn btn-xs btn-default" ui-sref="editGenre({ id: book.id })"><span class="glyphicon glyphicon-pencil"></span></a> 
+                <a class="btn btn-xs btn-danger" ng-click="editGenre({ id: book.id })"><span class="glyphicon glyphicon-remove"></span></a>
+            </td>
+          </tr>
+          <tr ng-if="!gneresVM.booksList.length">
+            <td colspan="4">
+                No Books in Inventory.  <a href="" ui-sref="addGenre">Add one now.</a>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+</div>
