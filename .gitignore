@@ -8,6 +8,8 @@ logs
 *.log
 npm-debug.log*
 
+target/
+
 # Runtime data
 pids
 *.pid

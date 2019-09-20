@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 76.0.3809 (Windows 10.0.0)" package="" timestamp="2019-09-20T10:51:52" id="0" hostname="hmchung" tests="43" errors="0" failures="0" time="0">
+<testsuite name="Chrome 76.0.3809 (Windows 10.0.0)" package="" timestamp="2019-09-20T11:02:17" id="0" hostname="hmchung" tests="43" errors="0" failures="0" time="0">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"/>
   </properties>
