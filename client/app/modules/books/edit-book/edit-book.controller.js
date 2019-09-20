@@ -46,6 +46,6 @@
             });
     }
 
-    angular.module('book-inventory-app.edit')
+    angular.module('book-inventory-app.books')
         .controller('EditBookController', EditBookController);
 })(angular);

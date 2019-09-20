@@ -55,6 +55,6 @@
         };
     }
 
-    angular.module('book-inventory-app.add')
+    angular.module('book-inventory-app.books')
         .controller('AddBookController', AddBookController);
 })(angular);

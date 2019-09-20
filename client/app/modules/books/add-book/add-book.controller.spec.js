@@ -11,7 +11,7 @@ describe('Controller - Add Book', function () {
     beforeEach(function () {
         module('ui.router.state');
         module('book-inventory-app');
-        module('book-inventory-app.add');
+        module('book-inventory-app.books');
 
         booksServiceMock = jasmine.createSpyObj('BooksService', ['createBook']);
         validateServiceMock = jasmine.createSpyObj('ValidateDateService', ['isValidDate']);

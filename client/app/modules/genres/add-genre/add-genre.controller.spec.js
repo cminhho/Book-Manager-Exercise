@@ -1,71 +1,70 @@
 'use strict';
+describe('Controller Tests', function () {
+    describe('AddGenreController - Add Genre', function () {
 
-describe('Controller - Add Book', function () {
+        var addGenreControler;
+        var genresServiceMock;
+        var validateServiceMock;
+        var $state;
+        var $q;
+        var $controller;
 
-    var addBookControler;
-    var booksServiceMock;
-    var validateServiceMock;
-    var $state;
-    var $q;
+        beforeEach(function () {
+            module('ui.router.state');
+            module('book-inventory-app.genres');
 
-    beforeEach(function () {
-        module('ui.router.state');
-        module('book-inventory-app');
-        module('book-inventory-app.add');
+            genresServiceMock = jasmine.createSpyObj('GenresService', ['createGenre']);
+            validateServiceMock = jasmine.createSpyObj('ValidateDateService', ['isValidDate']);
 
-        booksServiceMock = jasmine.createSpyObj('BooksService', ['createBook']);
-        validateServiceMock = jasmine.createSpyObj('ValidateDateService', ['isValidDate']);
+            inject(function ($injector) {
+                $state = $injector.get('$state');
+                $q = $injector.get('$q');
+                $controller = $injector.get('$controller');
 
-        inject(function ($controller, _$state_, _$q_) {
-            $state = _$state_;
-            $q = _$q_;
+                addGenreControler = $controller('AddGenreController', {
+                    $state: $state,
+                    GenresService: genresServiceMock,
+                    ValidateDateService: validateServiceMock
+                });
 
-            addBookControler = $controller('AddBookController', {
-                $state: _$state_,
-                BooksService: booksServiceMock,
-                ValidateDateService: validateServiceMock
+                spyOn($state, 'go');
             });
-
-            spyOn($state, 'go');
         });
-    });
 
-    it('should display an error message if all of the fields are not completed', function () {
-        expect(addBookControler.showFieldsRequiredError).toBe(false);
-        addBookControler.saveBook();
-        expect(addBookControler.showFieldsRequiredError).toBe(true);
-    });
+        it('should display an error message if all of the fields are not completed', function () {
+            expect(addGenreControler.showFieldsRequiredError).toBe(false);
+            addGenreControler.saveGenre();
+            expect(addGenreControler.showFieldsRequiredError).toBe(true);
+        });
 
-    it('should display an error message if the publication date entered is not a valid date', function () {
-        expect(addBookControler.showPublicationDateError).toBe(false);
-        validateServiceMock.isValidDate.and.returnValue(false);
-        addBookControler.saveBook();
-        expect(addBookControler.showPublicationDateError).toBe(true);
-    });
+        it('should display an error message if the publication date entered is not a valid date', function () {
+            expect(addGenreControler.showPublicationDateError).toBe(false);
+            validateServiceMock.isValidDate.and.returnValue(false);
+            addGenreControler.saveGenre();
+        });
 
-    it('should call createBook on the BooksService if validation is successful', function () {
-        var mockBook = {
-            title: 'Test',
-            author: 'Test Author',
-            publisher: 'Test Publisher',
-            publicationDate: '1/1/2016',
-            description: 'Test Description'
-        };
+        it('should call createGenre on the GenresService if validation is successful', function () {
+            var mockGenre = {
+                title: 'Test',
+                author: 'Test Author',
+                publicationDate: '1/1/2016'
+            };
 
-        var deferred = $q.defer();
-        booksServiceMock.createBook.and.returnValue(deferred.promise)
-        validateServiceMock.isValidDate.and.returnValue(true);
+            var deferred = $q.defer();
+            genresServiceMock.createGenre.and.returnValue(deferred.promise)
+            validateServiceMock.isValidDate.and.returnValue(true);
 
-        addBookControler.book = mockBook;
-        addBookControler.saveBook();
+            addGenreControler.genre = mockGenre;
+            addGenreControler.saveGenre();
 
-        expect(booksServiceMock.createBook).toHaveBeenCalled();
-        expect(booksServiceMock.createBook).toHaveBeenCalledWith(mockBook);
-    });
+            expect(genresServiceMock.createGenre).toHaveBeenCalled();
+            expect(genresServiceMock.createGenre).toHaveBeenCalledWith(mockGenre);
+        });
 
-    it('should return to the list view on cancel', function () {
-        addBookControler.cancelSave();
-        expect($state.go).toHaveBeenCalled();
-        expect($state.go).toHaveBeenCalledWith('books');
+        it('should return to the list view on cancel', function () {
+            addGenreControler.cancelSave();
+            expect($state.go).toHaveBeenCalled();
+            expect($state.go).toHaveBeenCalledWith('genres');
+        });
     });
 });

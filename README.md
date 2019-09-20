@@ -1,5 +1,9 @@
 # Book Manager Exercise
 
+Technicals:
+- AngularJS
+- Jasmine
+
 Prerequisites:
 
 - NodeJS
@@ -26,3 +30,7 @@ To run application:
 
 To run unit tests:
     karma start
+
+
+References:
+- https://scriptverse.academy/tutorials/jasmine-createspy-createspyobj.html
