@@ -28,6 +28,10 @@ To run application:
 - Run Server:
     node server/server
 
+Visit to http://localhost:8080 to view the home page
+
+<img src="/screenshots/books.png">
+
 To run unit tests:
     npm run test
 
