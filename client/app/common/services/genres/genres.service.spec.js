@@ -24,7 +24,7 @@ describe('Services - Books Services', function() {
     it('should make a GET call to retrieve a list of books', function() {
         $httpBackend.expectGET('/api/books').respond(200, []);
         booksService.getBooks();
-    })
+    });
 
     it('should make a GET call to retrieve a single book object', function() {
         $httpBackend.expectGET('/api/book/9').respond(200, {});

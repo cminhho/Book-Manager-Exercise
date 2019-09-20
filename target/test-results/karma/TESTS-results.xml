@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 76.0.3809 (Windows 10.0.0)" package="" timestamp="2019-09-20T08:00:16" id="0" hostname="hmchung" tests="40" errors="0" failures="0" time="0">
+<testsuite name="Chrome 76.0.3809 (Windows 10.0.0)" package="" timestamp="2019-09-20T10:06:49" id="0" hostname="hmchung" tests="43" errors="1" failures="0" time="0">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"/>
   </properties>
@@ -21,14 +21,17 @@
   <testcase name="Services - Books Services should make a POST call to create a new book" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
   <testcase name="Services - Books Services should make a PUT call to update an existing book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
   <testcase name="Services - Books Services should make a DELETE call to remove a book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Controller - Add Book should display an error message if all of the fields are not completed" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - Add Book"/>
-  <testcase name="Controller - Add Book should display an error message if the publication date entered is not a valid date" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - Add Book"/>
-  <testcase name="Controller - Add Book should call createBook on the BooksService if validation is successful" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - Add Book"/>
-  <testcase name="Controller - Add Book should return to the list view on cancel" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - Add Book"/>
+  <testcase name="Controller Tests Controller - Add Book should display an error message if all of the fields are not completed" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
+  <testcase name="Controller Tests Controller - Add Book should display an error message if the publication date entered is not a valid date" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
+  <testcase name="Controller Tests Controller - Add Book should call createBook on the BooksService if validation is successful" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
+  <testcase name="Controller Tests Controller - Add Book should return to the list view on cancel" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller - Books Controller should load a list of books on init" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - Books Controller"/>
   <testcase name="Controller - Books Controller should select a book for the details view" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - Books Controller"/>
   <testcase name="Controller - Books Controller should call the service to delete a book" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - Books Controller"/>
   <testcase name="Controller - Books Controller should reload the book list after successfully deleting a book" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - Books Controller"/>
+  <testcase name="Controller Tests EditBookController - Edit Book Controller should populate book data from the book service on init" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
+  <testcase name="Controller Tests EditBookController - Edit Book Controller should call the book service to save the book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
+  <testcase name="Controller Tests EditBookController - Edit Book Controller should return to the book list" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller Tests AddGenreController - Add Genre should display an error message if all of the fields are not completed" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller Tests AddGenreController - Add Genre should display an error message if the publication date entered is not a valid date" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller Tests AddGenreController - Add Genre should call createGenre on the GenresService if validation is successful" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
@@ -37,14 +40,10 @@
   <testcase name="Controller Tests EditGenreController - Edit Genre Controller should call the genre service to save the genre object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller Tests EditGenreController - Edit Genre Controller should return to the genre list" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller Tests GenresController should load a list of genres on init" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
-  <testcase name="Controller Tests GenresController should select a book for the details view" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
-  <testcase name="Controller Tests GenresController should call the service to delete a genre" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
-  <testcase name="Controller Tests GenresController should reload the genre list after successfully deleting a genre" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
-  <testcase name="Controller - HelloJasmineController Controller Creates variable" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - HelloJasmineController Controller"/>
-  <testcase name="Controller - HelloJasmineController Controller Increments counter" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - HelloJasmineController Controller"/>
-  <testcase name="Controller - HelloJasmineController Controller Resets counter" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - HelloJasmineController Controller"/>
   <system-out>
-    <![CDATA[
+    <![CDATA[Chrome 76.0.3809 (Windows 10.0.0) ERROR
+  Disconnected, because no message in 10000 ms.
+
 ]]>
   </system-out>
   <system-err/>

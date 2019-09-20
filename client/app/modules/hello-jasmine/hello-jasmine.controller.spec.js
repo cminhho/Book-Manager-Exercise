@@ -3,18 +3,18 @@
 describe('Controller - HelloJasmineController Controller', function () {
 
     // Arrange
-    var mockScope;
+    var $scope;
     var controller;
     var $rootScope;
 
-    beforeEach(angular.mock.module('book-inventory-app.hello-jasmine'));
+    beforeEach(module('book-inventory-app.hello-jasmine'));
 
-    beforeEach(angular.mock.inject(function ($controller, _$rootScope_) {
-        $rootScope = _$rootScope_;
-        mockScope = {};
+    beforeEach(inject(function ($injector, $controller) {
+        $rootScope = $injector.get('$rootScope');
+        $scope = $rootScope.$new();
 
         $controller('HelloJasmineController', {
-            $scope: mockScope,
+            $scope: $scope,
             BackendService: {
                 init: function() {
                     return 1;
@@ -32,16 +32,16 @@ describe('Controller - HelloJasmineController Controller', function () {
     }));
 
     it('Creates variable', function () {
-        expect(mockScope.counter).toEqual(0);
+        expect($scope.counter).toEqual(0);
     })
 
     it('Increments counter', function () {
-        mockScope.incrementCounter();
-        expect(mockScope.counter).toEqual(5);
+        $scope.incrementCounter();
+        expect($scope.counter).toEqual(5);
     });
 
     it('Resets counter', function () {
-        mockScope.resetCounter();
-        expect(mockScope.counter).toEqual(1);
+        $scope.resetCounter();
+        expect($scope.counter).toEqual(1);
     });
 });
