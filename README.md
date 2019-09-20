@@ -29,8 +29,10 @@ To run application:
     node server/server
 
 To run unit tests:
-    karma start
+    npm run test
 
+Opening the HTML report at target\test-results\coverage\report-lcov\lcov-report\index.html results in:
+<img src="/screenshots/karma-coverage.png">
 
 References:
 - https://scriptverse.academy/tutorials/jasmine-createspy-createspyobj.html
