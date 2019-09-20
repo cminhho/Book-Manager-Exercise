@@ -233,25 +233,14 @@
       assert.strictEqual(add('2')('1'), '12');
     });
 
-    QUnit.test('should only add a `placeholder` property if needed', function(assert) {
+    QUnit.test('should add a `placeholder` property', function(assert) {
       assert.expect(2);
 
       if (!document) {
-        var methodNames = _.keys(mapping.placeholder),
-            expected = _.map(methodNames, _.constant(true));
-
-        var actual = _.map(methodNames, function(methodName) {
-          var object = {};
-          object[methodName] = _[methodName];
-
-          var lodash = convert(object);
-          return methodName in lodash;
-        });
-
-        assert.deepEqual(actual, expected);
-
         var lodash = convert({ 'add': _.add });
-        assert.notOk('placeholder' in lodash);
+
+        assert.strictEqual(lodash.placeholder, lodash);
+        assert.strictEqual(lodash.add.placeholder, lodash);
       }
       else {
         skipAssert(assert, 2);
@@ -645,7 +634,16 @@
       });
     });
 
-    _.forOwn(mapping.placeholder, function(truthy, methodName) {
+    var methodNames = [
+      'bind',
+      'bindKey',
+      'curry',
+      'curryRight',
+      'partial',
+      'partialRight'
+    ];
+
+    _.each(methodNames, function(methodName) {
       var func = fp[methodName];
 
       QUnit.test('fp.' + methodName + '` should have a `placeholder` property', function(assert) {
@@ -1847,7 +1845,7 @@
         args || (args = slice.call(arguments));
       })(0)([1, 2, 3]);
 
-      assert.deepEqual(args, isReduce ? [0, 1] : [0, 3]);
+      assert.deepEqual(args, isReduce ? [0, 1] : [3, 0]);
     });
 
     QUnit.test('`fp.' + methodName + '` should provide the correct `iteratee` arguments when iterating an object', function(assert) {
@@ -1858,8 +1856,8 @@
           isFIFO = _.keys(object)[0] == 'a';
 
       var expected = isFIFO
-        ? (isReduce ? [0, 1] : [0, 2])
-        : (isReduce ? [0, 2] : [0, 1]);
+        ? (isReduce ? [0, 1] : [2, 0])
+        : (isReduce ? [0, 2] : [1, 0]);
 
       func(function() {
         args || (args = slice.call(arguments));
@@ -2136,6 +2134,16 @@
 
       var actual = fp.update('a.b')(_.identity)({ 'a': { 'b': 1 } });
       assert.strictEqual(typeof actual.a.b, 'number');
+    });
+
+    QUnit.test('should not convert uncloneables to objects', function(assert) {
+      assert.expect(2);
+
+      var object = { 'a': { 'b': _.constant(true) } },
+          actual = fp.update('a.b')(_.identity)(object);
+
+      assert.strictEqual(typeof object.a.b, 'function');
+      assert.strictEqual(object.a.b, actual.a.b);
     });
 
     QUnit.test('should not mutate values', function(assert) {

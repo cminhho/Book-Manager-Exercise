@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var baseConvert = __webpack_require__(1);
 
@@ -74,12 +74,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = browserConvert;
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var mapping = __webpack_require__(2),
 	    fallbackHolder = __webpack_require__(3);
+
+	/** Built-in value reference. */
+	var push = Array.prototype.push;
 
 	/**
 	 * Creates a function, with an arity of `n`, that invokes `func` with the
@@ -142,6 +145,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
+	 * A specialized version of `_.spread` which flattens the spread array into
+	 * the arguments of the invoked `func`.
+	 *
+	 * @private
+	 * @param {Function} func The function to spread arguments over.
+	 * @param {number} start The start position of the spread.
+	 * @returns {Function} Returns the new function.
+	 */
+	function flatSpread(func, start) {
+	  return function() {
+	    var length = arguments.length,
+	        lastIndex = length - 1,
+	        args = Array(length);
+
+	    while (length--) {
+	      args[length] = arguments[length];
+	    }
+	    var array = args[start],
+	        otherArgs = args.slice(0, start);
+
+	    if (array) {
+	      push.apply(otherArgs, array);
+	    }
+	    if (start != lastIndex) {
+	      push.apply(otherArgs, args.slice(start + 1));
+	    }
+	    return func.apply(this, otherArgs);
+	  };
+	}
+
+	/**
 	 * Creates a function that wraps `func` and uses `cloner` to clone the first
 	 * argument it receives.
 	 *
@@ -182,8 +216,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {Function|Object} Returns the converted function or object.
 	 */
 	function baseConvert(util, name, func, options) {
-	  var setPlaceholder,
-	      isLib = typeof name == 'function',
+	  var isLib = typeof name == 'function',
 	      isObj = name === Object(name);
 
 	  if (isObj) {
@@ -204,10 +237,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'rearg': 'rearg' in options ? options.rearg : true
 	  };
 
-	  var forceCurry = ('curry' in options) && options.curry,
+	  var defaultHolder = isLib ? func : fallbackHolder,
+	      forceCurry = ('curry' in options) && options.curry,
 	      forceFixed = ('fixed' in options) && options.fixed,
 	      forceRearg = ('rearg' in options) && options.rearg,
-	      placeholder = isLib ? func : fallbackHolder,
 	      pristine = isLib ? func.runInContext() : undefined;
 
 	  var helpers = isLib ? func : {
@@ -217,11 +250,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'curry': util.curry,
 	    'forEach': util.forEach,
 	    'isArray': util.isArray,
+	    'isError': util.isError,
 	    'isFunction': util.isFunction,
+	    'isWeakMap': util.isWeakMap,
 	    'iteratee': util.iteratee,
 	    'keys': util.keys,
 	    'rearg': util.rearg,
-	    'spread': util.spread,
 	    'toInteger': util.toInteger,
 	    'toPath': util.toPath
 	  };
@@ -232,10 +266,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      curry = helpers.curry,
 	      each = helpers.forEach,
 	      isArray = helpers.isArray,
+	      isError = helpers.isError,
 	      isFunction = helpers.isFunction,
+	      isWeakMap = helpers.isWeakMap,
 	      keys = helpers.keys,
 	      rearg = helpers.rearg,
-	      spread = helpers.spread,
 	      toInteger = helpers.toInteger,
 	      toPath = helpers.toPath;
 
@@ -362,7 +397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var data = mapping.methodSpread[name],
 	          start = data && data.start;
 
-	      return start  === undefined ? ary(func, n) : spread(func, start);
+	      return start  === undefined ? ary(func, n) : flatSpread(func, start);
 	    }
 	    return func;
 	  }
@@ -403,8 +438,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var key = path[index],
 	          value = nested[key];
 
-	      if (value != null) {
-	        nested[path[index]] = clone(index == lastIndex ? value : Object(value));
+	      if (value != null &&
+	          !(isFunction(value) || isError(value) || isWeakMap(value))) {
+	        nested[key] = clone(index == lastIndex ? value : Object(value));
 	      }
 	      nested = nested[key];
 	    }
@@ -509,7 +545,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {Function} func The function to wrap.
 	   * @returns {Function} Returns the converted function.
 	   */
-	  function wrap(name, func) {
+	  function wrap(name, func, placeholder) {
 	    var result,
 	        realName = mapping.aliasToReal[name] || name,
 	        wrapped = func,
@@ -532,8 +568,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    each(aryMethodKeys, function(aryKey) {
 	      each(mapping.aryMethod[aryKey], function(otherName) {
 	        if (realName == otherName) {
-	          var spreadData = mapping.methodSpread[realName],
-	              afterRearg = spreadData && spreadData.afterRearg;
+	          var data = mapping.methodSpread[realName],
+	              afterRearg = data && data.afterRearg;
 
 	          result = afterRearg
 	            ? castFixed(realName, castRearg(realName, wrapped, aryKey), aryKey)
@@ -554,17 +590,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 	    }
 	    result.convert = createConverter(realName, func);
-	    if (mapping.placeholder[realName]) {
-	      setPlaceholder = true;
-	      result.placeholder = func.placeholder = placeholder;
-	    }
+	    result.placeholder = func.placeholder = placeholder;
+
 	    return result;
 	  }
 
 	  /*--------------------------------------------------------------------------*/
 
 	  if (!isObj) {
-	    return wrap(name, func);
+	    return wrap(name, func, defaultHolder);
 	  }
 	  var _ = func;
 
@@ -574,7 +608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    each(mapping.aryMethod[aryKey], function(key) {
 	      var func = _[mapping.remap[key] || key];
 	      if (func) {
-	        pairs.push([key, wrap(key, func)]);
+	        pairs.push([key, wrap(key, func, _)]);
 	      }
 	    });
 	  });
@@ -600,9 +634,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 
 	  _.convert = convertLib;
-	  if (setPlaceholder) {
-	    _.placeholder = placeholder;
-	  }
+	  _.placeholder = _;
+
 	  // Assign aliases.
 	  each(keys(_), function(key) {
 	    each(mapping.realToAlias[key] || [], function(alias) {
@@ -616,9 +649,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = baseConvert;
 
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/** Used to map aliases to their real names. */
 	exports.aliasToReal = {
@@ -789,7 +822,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/** Used to map method names to iteratee rearg configs. */
 	exports.iterateeRearg = {
-	  'mapKeys': [1]
+	  'mapKeys': [1],
+	  'reduceRight': [1, 0]
 	};
 
 	/** Used to map method names to rearg configs. */
@@ -880,16 +914,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'update': true,
 	    'updateWith': true
 	  }
-	};
-
-	/** Used to track methods with placeholder support */
-	exports.placeholder = {
-	  'bind': true,
-	  'bindKey': true,
-	  'curry': true,
-	  'curryRight': true,
-	  'partial': true,
-	  'partialRight': true
 	};
 
 	/** Used to map real names to their aliases. */
@@ -989,9 +1013,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/**
 	 * The default argument placeholder value for methods.
@@ -1001,7 +1025,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = {};
 
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;
