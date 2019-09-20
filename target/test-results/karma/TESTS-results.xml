@@ -1,26 +1,26 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 76.0.3809 (Windows 10.0.0)" package="" timestamp="2019-09-20T10:06:49" id="0" hostname="hmchung" tests="43" errors="1" failures="0" time="0">
+<testsuite name="Chrome 76.0.3809 (Windows 10.0.0)" package="" timestamp="2019-09-20T10:51:52" id="0" hostname="hmchung" tests="43" errors="0" failures="0" time="0">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"/>
   </properties>
-  <testcase name="Filter - Format Long Date Filter should return an empty string if there is no input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter - Format Long Date Filter"/>
-  <testcase name="Filter - Format Long Date Filter should return a string in the format of Month DD, YYYY for a valid date input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter - Format Long Date Filter"/>
-  <testcase name="Filter - Format Name Filter should return the input with the first letter in each work capitalized and the rest un lower case" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter - Format Name Filter"/>
-  <testcase name="Filter - Format Name Filter should return an empty string for empty input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter - Format Name Filter"/>
-  <testcase name="Filter - Format Long Date Filter should return an empty string if there is no input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter - Format Long Date Filter"/>
-  <testcase name="Filter - Format Long Date Filter should return a string in the format of MM/DD/YYYY for a valid date input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter - Format Long Date Filter"/>
-  <testcase name="Services - Books Services should make a GET call to retrieve a list of books" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Services - Books Services should make a GET call to retrieve a single book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Services - Books Services should make a POST call to create a new book" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Services - Books Services should make a PUT call to update an existing book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Services - Books Services should make a DELETE call to remove a book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Services - Validate Date Service should return true for a valid date input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Validate Date Service"/>
-  <testcase name="Services - Validate Date Service should return false for an invalid date input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Validate Date Service"/>
-  <testcase name="Services - Books Services should make a GET call to retrieve a list of books" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Services - Books Services should make a GET call to retrieve a single book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Services - Books Services should make a POST call to create a new book" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Services - Books Services should make a PUT call to update an existing book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
-  <testcase name="Services - Books Services should make a DELETE call to remove a book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Services - Books Services"/>
+  <testcase name="Filter Tests formatLongDate should return an empty string if there is no input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter Tests"/>
+  <testcase name="Filter Tests formatLongDate should return a string in the format of Month DD, YYYY for a valid date input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter Tests"/>
+  <testcase name="Filter Tests formatName should return the input with the first letter in each work capitalized and the rest un lower case" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter Tests"/>
+  <testcase name="Filter Tests formatName should return an empty string for empty input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter Tests"/>
+  <testcase name="Filter Tests formatShortDateFilter should return an empty string if there is no input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter Tests"/>
+  <testcase name="Filter Tests formatShortDateFilter should return a string in the format of MM/DD/YYYY for a valid date input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Filter Tests"/>
+  <testcase name="Service Tests BooksService should make a GET call to retrieve a list of books" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests BooksService should make a GET call to retrieve a single book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests BooksService should make a POST call to create a new book" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests BooksService should make a PUT call to update an existing book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests BooksService should make a DELETE call to remove a book object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests ValidateDateService should return true for a valid date input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests ValidateDateService should return false for an invalid date input" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests GenresService should make a GET call to retrieve a list of genres" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests GenresService should make a GET call to retrieve a single genre object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests GenresService should make a POST call to create a new genre" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests GenresService should make a PUT call to update an existing genre object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
+  <testcase name="Service Tests GenresService should make a DELETE call to remove a genre object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Service Tests"/>
   <testcase name="Controller Tests Controller - Add Book should display an error message if all of the fields are not completed" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller Tests Controller - Add Book should display an error message if the publication date entered is not a valid date" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller Tests Controller - Add Book should call createBook on the BooksService if validation is successful" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
@@ -40,10 +40,14 @@
   <testcase name="Controller Tests EditGenreController - Edit Genre Controller should call the genre service to save the genre object" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller Tests EditGenreController - Edit Genre Controller should return to the genre list" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
   <testcase name="Controller Tests GenresController should load a list of genres on init" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
+  <testcase name="Controller Tests GenresController should select a book for the details view" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
+  <testcase name="Controller Tests GenresController should call the service to delete a genre" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
+  <testcase name="Controller Tests GenresController should reload the genre list after successfully deleting a genre" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller Tests"/>
+  <testcase name="Controller - HelloJasmineController Controller Creates variable" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - HelloJasmineController Controller"/>
+  <testcase name="Controller - HelloJasmineController Controller Increments counter" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - HelloJasmineController Controller"/>
+  <testcase name="Controller - HelloJasmineController Controller Resets counter" time="0" classname="Chrome_76_0_3809_(Windows_10_0_0).Controller - HelloJasmineController Controller"/>
   <system-out>
-    <![CDATA[Chrome 76.0.3809 (Windows 10.0.0) ERROR
-  Disconnected, because no message in 10000 ms.
-
+    <![CDATA[
 ]]>
   </system-out>
   <system-err/>

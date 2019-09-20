@@ -1,50 +1,52 @@
 'use strict';
+describe('Service Tests', function () {
+    describe('GenresService', function () {
 
-describe('Services - Books Services', function() {
+        var genresService;
+        var $httpBackend;
 
-    var booksService;
-    var $httpBackend;
+        beforeEach(function () {
+            module('book-inventory-app.services');
 
-    beforeEach(function() {
-        module('book-inventory-app.services');
+            inject(function (GenresService, _$httpBackend_) {
+                $httpBackend = _$httpBackend_;
+                genresService = GenresService;
 
-        inject(function(BooksService, _$httpBackend_) {
-            $httpBackend = _$httpBackend_;
-            booksService = BooksService;
+                $httpBackend.verifyNoOutstandingRequest();
+            });
+        });
 
+        afterEach(function () {
+            $httpBackend.flush();
             $httpBackend.verifyNoOutstandingRequest();
+        })
+
+        it('should make a GET call to retrieve a list of genres', function () {
+            $httpBackend.expectGET('/api/genres').respond(200, []);
+            genresService.getGenres();
+        });
+
+        it('should make a GET call to retrieve a single genre object', function () {
+            $httpBackend.expectGET('/api/genre/9').respond(200, {});
+            genresService.getGenre('9');
+        });
+
+        it('should make a POST call to create a new genre', function () {
+            var mockGenre = { id: '111' };
+            $httpBackend.expectPOST('/api/genre/').respond(200, true);
+            genresService.createGenre(mockGenre);
+        });
+
+        it('should make a PUT call to update an existing genre object', function () {
+            var mockGenre = { id: '999' };
+            $httpBackend.expectPUT('/api/genre/999', mockGenre).respond(200, true);
+            genresService.saveGenre(mockGenre, mockGenre.id);
+        });
+
+        it('should make a DELETE call to remove a genre object', function () {
+            $httpBackend.expectDELETE('/api/genre/123').respond(200, true);
+            genresService.deleteGenre('123');
         });
     });
 
-    afterEach(function() {
-        $httpBackend.flush();
-        $httpBackend.verifyNoOutstandingRequest();
-    })
-
-    it('should make a GET call to retrieve a list of books', function() {
-        $httpBackend.expectGET('/api/books').respond(200, []);
-        booksService.getBooks();
-    });
-
-    it('should make a GET call to retrieve a single book object', function() {
-        $httpBackend.expectGET('/api/book/9').respond(200, {});
-        booksService.getBook('9');
-    });
-
-    it('should make a POST call to create a new book', function() {
-        var mockBook = { id: '111' };
-        $httpBackend.expectPOST('/api/book/').respond(200, true);
-        booksService.createBook(mockBook);
-    });
-
-    it ('should make a PUT call to update an existing book object', function() {
-        var mockBook = { id: '999' };
-        $httpBackend.expectPUT('/api/book/999', mockBook).respond(200, true);
-        booksService.saveBook(mockBook, mockBook.id);
-    });
-
-    it('should make a DELETE call to remove a book object', function() {
-        $httpBackend.expectDELETE('/api/book/123').respond(200, true);
-        booksService.deleteBook('123');
-    });
 });
