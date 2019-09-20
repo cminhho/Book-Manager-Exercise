@@ -24,7 +24,7 @@
                 url: '/books/edit/:id',
                 views: {
                     'content@': {
-                        templateUrl: 'app/modules/books/edit-book/editBook.html',
+                        templateUrl: 'app/modules/books/edit-book/edit-book.html',
                         controller: 'EditBookController as editBookVM'
                     }
                 }
@@ -34,7 +34,7 @@
                 url: '/books/add',
                 views: {
                     'content@': {
-                        templateUrl: 'app/modules/books/add-book/addBook.html',
+                        templateUrl: 'app/modules/books/add-book/add-book.html',
                         controller: 'AddBookController as addBookVM'
                     }
                 }
