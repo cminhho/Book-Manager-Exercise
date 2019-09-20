@@ -80,6 +80,7 @@ describe('Controller Tests', function () {
 
             // then
             expect(genresServiceMock.getGenres).toHaveBeenCalled();
+            expect(genresServiceMock.deleteGenre).toHaveBeenCalled();
         })
 
     });

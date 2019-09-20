@@ -38,13 +38,15 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'client/app/*.js': ['coverage'],
+      'client/app/**/*.js': ['coverage']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'junit'],
+    reporters: ['dots', 'progress', 'junit', 'coverage'],
 
 
     // web server port
@@ -65,6 +67,13 @@ module.exports = function(config) {
 
     junitReporter: {
       outputFile: '../target/test-results/karma/TESTS-results.xml'
+    },
+
+    coverageReporter: {
+      dir: 'target/test-results/coverage',
+      reporters: [
+          {type: 'lcov', subdir: 'report-lcov'}
+      ]
     },
 
     // Start these browsers, currently available:

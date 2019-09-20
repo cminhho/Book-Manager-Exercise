@@ -43,7 +43,7 @@
             <td class="text-right">
                 <a href="" ng-click="selectGenre(genre)">Details</a>
                 <a class="btn btn-xs btn-default" ui-sref="editGenre({ id: genre.id })"><span class="glyphicon glyphicon-pencil"></span></a> 
-                <a class="btn btn-xs btn-danger" ng-click="editGenre({ id: genre.id })"><span class="glyphicon glyphicon-remove"></span></a>
+                <a class="btn btn-xs btn-danger" ng-click="deleteGenre(genre.id)"><span class="glyphicon glyphicon-remove"></span></a>
             </td>
           </tr>
           <tr ng-if="!genresList.length">
